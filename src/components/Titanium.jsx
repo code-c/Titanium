@@ -3,13 +3,30 @@ import * as PIXI from "pixi.js";
 
 // Sprite Classes
 import Atom from './Atom.js';
-import CElectron from "./ColoredElectron";
 
 import C from "./images/appImages/c.png";
 import chrome from "./images/appImages/chrome.png";
 import clion from "./images/appImages/clion.png";
-import firefox from "./images/appImages/Firefox.png";
-
+import firefox from "./images/appImages/firefox.png";
+import osx from "./images/appImages/osx.png";
+import sanity from "./images/appImages/sanity.png";
+import vsc from "./images/appImages/vsc.png";
+import linux from "./images/appImages/linux.png";
+import photoshop from "./images/appImages/photoshop.png";
+import premiere from "./images/appImages/premiere.png";
+import python from "./images/appImages/python.png";
+import node from "./images/appImages/node.png";
+import lightroom from "./images/appImages/lightroom.png";
+import latex from "./images/appImages/latex.png";
+import cpp from "./images/appImages/cpp.png";
+import css from "./images/appImages/css.png";
+import html from "./images/appImages/html.png";
+import java from "./images/appImages/java.png";
+import js from "./images/appImages/js.png";
+import wasm from "./images/appImages/wasm.png";
+import rpi from "./images/appImages/rpi.png";
+import react from "./images/appImages/react.png";
+import pixi from "./images/appImages/pixi.png";
 
 //style
 
@@ -21,7 +38,7 @@ export default class Render extends React.Component {
 
         // calculate pixel width needed
         const pxWidth = window.innerWidth;
-        const pxHeight = 400;
+        const pxHeight = 500;
        
         // PIXI renderer and settings
         const renderer = PIXI.autoDetectRenderer({
@@ -30,13 +47,13 @@ export default class Render extends React.Component {
             resolution: window.devicePixelRatio || 1,
             width: pxWidth,
             height: pxHeight,
-            // transparent: true
+            transparent: true
         });
         
         // declare variables being used regularly
         let stage;
         let atom;
-        let keys = {};
+        let atom2;
         let images = [];
 
         // append to the body
@@ -52,10 +69,33 @@ export default class Render extends React.Component {
         // normally we would use the loader like this however i dont want to
         const loader = new PIXI.Loader();
         // loader.add("Clang",C);
-        images.push("./images/appImages/c.png");
-        images.push("./images/appImages/chrome.png");
-        // images.push(clion);
-        // images.push(firefox);
+        // OS's
+        images.push(osx);
+        images.push(linux);
+        // tools
+        images.push(photoshop);
+        images.push(vsc);
+        images.push(firefox);
+        images.push(premiere);
+        images.push(chrome);
+        images.push(lightroom);
+        images.push(clion);
+        images.push(rpi);
+
+        // langauges
+        images.push(C);
+        images.push(sanity);
+        images.push(python);
+        images.push(node);
+        images.push(latex);
+        images.push(cpp);
+        images.push(css);
+        images.push(html);
+        images.push(java);
+        images.push(js);
+        images.push(wasm);
+        images.push(react);
+        images.push(pixi);
 
         
         // add resources to the loader to use later
@@ -107,12 +147,14 @@ export default class Render extends React.Component {
             //store local variables based on current w/h
             const pxW = renderer.screen.width;
             const pxH = renderer.screen.height;
-            const maxRadius = 150;
+            const maxRadius = 250;
             const speed = .001;
 
-            atom = new Atom(pxW/2, pxH/2, maxRadius, speed);
+            atom = new Atom(0, pxH/2, maxRadius, speed);
+            atom2 = new Atom(pxW, pxH/2, maxRadius, speed);
 
             atom.loadRings(stage, images);
+            atom2.loadRings(stage, images);
         }
     };
 
