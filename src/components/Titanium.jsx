@@ -47,7 +47,7 @@ export default class Render extends React.Component {
             resolution: window.devicePixelRatio || 1,
             width: pxWidth,
             height: pxHeight,
-            transparent: true
+            backgroundAlpha: 0
         });
         
         // declare variables being used regularly
@@ -64,6 +64,7 @@ export default class Render extends React.Component {
         // window.addEventListener('touchstart', startTouch);
         // window.addEventListener('touchmove', touchMove);
         // window.addEventListener('touchend', cancelTouch);
+        window.addEventListener('resize', resizeWindow);
         
         //create the PIXI loader
         // normally we would use the loader like this however i dont want to
@@ -137,6 +138,12 @@ export default class Render extends React.Component {
         // function touchMove(touchEvent) {
         //     touchEvent.preventDefault();
         // }
+
+        function resizeWindow() {
+            const newPxWidth = window.innerWidth;
+            renderer.resize(newPxWidth, pxHeight);
+            atom2.reposition(newPxWidth);
+        }
 
 
         function loop() {

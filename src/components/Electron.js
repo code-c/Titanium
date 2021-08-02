@@ -26,6 +26,10 @@ export default class Electron extends PIXI.Sprite {
         this.speed = speed;
     }
 
+    reposition(x){
+        this.x = (x + this.radius);
+    }
+
     reset() {
         this.y = this.centerY + this.radius;
         this.x = this.centerX + this.radius;
