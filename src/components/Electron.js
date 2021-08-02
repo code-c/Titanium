@@ -2,15 +2,13 @@
 author: Codie Cottrell
 */
 import * as PIXI from "pixi.js";
-import electronIMG from './images/electron.png';
-import c from "./images/appImages/c.png";
 
 let electron;
 
 export default class Electron extends PIXI.Sprite {
-    constructor(x = 0, y = 0, radius = 10, startRadian=0, speed=1) {
+    constructor(x = 0, y = 0, image, radius = 10, startRadian=0, speed=1) {
         // like PIXI.texture.from to create sprite from texture
-        loadElectron();
+        loadElectron(image);
         //work with it set values
         super(electron);
         this.centerY = y; //k
@@ -22,11 +20,10 @@ export default class Electron extends PIXI.Sprite {
         this.y = this.centerY; // 0 starting point
         this.x = this.xHigher;
         this.anchor.set(0.5, 0.5)
-        this.scale.x = 1;
-        this.scale.y = 1;
+        this.scale.x = .17;
+        this.scale.y = .17;
 
         this.speed = speed;
-        
     }
 
     reset() {
@@ -38,10 +35,11 @@ export default class Electron extends PIXI.Sprite {
         this.x = this.centerX + (this.radius * Math.cos(this.radian));
         this.y = this.centerY + (this.radius * Math.sin(this.radian));
         this.radian += 0.01*(this.speed);
+        this.rotation = this.radian*2;
     }
 }
 
 //set the image as the player
-function loadElectron() {
-    electron = new PIXI.Texture.from(electronIMG);
+function loadElectron(image) {
+    electron = new PIXI.Texture.from(String(image));
 }
