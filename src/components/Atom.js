@@ -16,9 +16,22 @@ export default class Atom {
         this.rings = 4;
     }
 
+    reposition(x){
+        this.centerX = x;
+        electrons.forEach(electron => electron.x = electron.reposition(x))
+    }
+
+    setSpeed(newSpeed){
+        electrons.forEach(electron => electron.setSpeed(newSpeed));
+    }
+
     move() {
         // moves each electron along curve
         electrons.forEach(electron => electron.move());
+    }
+
+    reset() {
+        electrons.forEach(electron => electron.reset());
     }
 
     loadRings(stage, images) {
