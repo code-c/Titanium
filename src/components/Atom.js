@@ -21,6 +21,10 @@ export default class Atom {
         electrons.forEach(electron => electron.x = electron.reposition(x))
     }
 
+    setSpeed(newSpeed){
+        electrons.forEach(electron => electron.setSpeed(newSpeed));
+    }
+
     move() {
         // moves each electron along curve
         electrons.forEach(electron => electron.move());

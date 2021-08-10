@@ -55,6 +55,8 @@ export default class Render extends React.Component {
         let atom;
         let atom2;
         let images = [];
+        let lastKnownScrollPosition = 0;
+        let ticking = false;
 
         // append to the body
         // use this to place to whatever div you want it in
@@ -64,6 +66,19 @@ export default class Render extends React.Component {
         // window.addEventListener('touchstart', startTouch);
         // window.addEventListener('touchmove', touchMove);
         // window.addEventListener('touchend', cancelTouch);
+        window.addEventListener('scroll', function(e) {
+            lastKnownScrollPosition = window.scrollY;
+          
+            if (!ticking) {
+              window.requestAnimationFrame(function() {
+                scrollEffect(lastKnownScrollPosition);
+                ticking = false;
+              });
+          
+              ticking = true;
+            }
+          });
+
         window.addEventListener('resize', resizeWindow);
         
         //create the PIXI loader
@@ -138,6 +153,11 @@ export default class Render extends React.Component {
         // function touchMove(touchEvent) {
         //     touchEvent.preventDefault();
         // }
+
+        function scrollEffect(lastKnownScrollPosition) {
+            const currSpeed = atom.speed;
+            atom.setSpeed(currSpeed + 1);
+        }
 
         function resizeWindow() {
             const newPxWidth = window.innerWidth;
